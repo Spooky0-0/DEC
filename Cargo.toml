@@ -1,0 +1,29 @@
+[package]
+name = "deterministic-exchange-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Antigravity Systems Team"]
+description = "High-performance, deterministic single-threaded financial matching engine core."
+
+[dependencies]
+# No external dependencies to ensure this crate is fully no-std compatible
+# and can be checked/compiled in environments without full Visual Studio SDKs.
+
+[profile.release]
+# Optimize aggressively for speed (-O3 equivalent)
+opt-level = 3
+# Enable link-time optimizations across all crates in the dependency graph
+lto = "fat"
+# Reduce parallel compilation to a single unit to maximize optimization scope
+codegen-units = 1
+# Remove panic unwinding overhead to shrink binaries and optimize call sites
+panic = "abort"
+# Enable frame pointers for accurate CPU profiling if needed
+debug = true
+# Strip debug symbols from the final production binary for deployment
+strip = false
+
+[features]
+default = ["std"]
+std = []
+

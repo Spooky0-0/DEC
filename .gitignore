@@ -1,0 +1,19 @@
+# Rust build artifacts
+/target/
+
+# Cargo backup files
+**/*.rs.bk
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS metadata
+Thumbs.db
+Desktop.ini
