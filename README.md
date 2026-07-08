@@ -37,6 +37,16 @@ The entire hot-path matching loop runs single-threaded, avoiding race conditions
 
 ---
 
+## Hardware & Deployment Architecture (Tier-1 Optimizations)
+
+### 1. Kernel-Bypass Networking Integration
+True Tier-1 exchanges cannot tolerate the latency overhead of standard Linux socket APIs or the OS network stack. The DEC architecture is deliberately designed with decoupled I/O boundaries to support direct polling integrations with kernel-bypass networking interfaces (such as **DPDK** or **Solarflare OpenOnload**). This ensures inbound packets are read directly off the Network Interface Card (NIC) memory space without kernel context switching.
+
+### 2. CPU Core Isolation (`isolcpus`)
+To guarantee deterministic execution and eliminate scheduler jitter, the DEC matching thread must be deployed on bare-metal hardware using strict CPU core pinning. We recommend isolating the matching thread using the Linux `isolcpus` kernel boot parameter (e.g., `isolcpus=2-5`). This completely bans the OS scheduler from interrupting the matching core with background tasks, kernel threads, or interrupts, locking in the sub-microsecond latency profile.
+
+---
+
 ## Performance & Invariant Validation
 
 DEC is validated for accuracy using a property-based test simulator executing **10,000+ randomized event permutations** per check. It asserts that the total volume of injected orders exactly balances against executed, cancelled, and resting components.
