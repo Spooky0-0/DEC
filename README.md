@@ -52,3 +52,5 @@ To guarantee deterministic execution and eliminate scheduler jitter, the DEC mat
 DEC is validated for accuracy using a property-based test simulator executing **10,000+ randomized event permutations** per check. It asserts that the total volume of injected orders exactly balances against executed, cancelled, and resting components.
 
 For detailed performance profiles, latency curves, and RTO recovery times, see [BENCHMARKS.md](file:///d:/Software%20Engineering%20Projects/New%20folder%20(3)/BENCHMARKS.md).
+
+License: Proprietary
