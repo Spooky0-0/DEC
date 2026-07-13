@@ -2,7 +2,7 @@
 name = "deterministic-exchange-core"
 version = "0.1.0"
 edition = "2021"
-authors = ["Antigravity Systems Team"]
+authors = D.R
 description = "High-performance, deterministic single-threaded financial matching engine core."
 
 [dependencies]
